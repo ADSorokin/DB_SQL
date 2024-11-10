@@ -46,15 +46,15 @@ employeedetails;
 Используйте таблицы Orders, OrderDetails и Products.*/
 
 CREATE VIEW HighValueOrders AS 
-	 SELECT 
+	SELECT 
       	o.OrderID,
       	OrderDate,
       	SUM(Quantity*Price) as TotalAmount  	
-      FROM  orders o          
-      JOIN orderdetails od ON o.OrderID = od.OrderID
-      JOIN products p on od.ProductID = p.ProductID
-      GROUP BY o.OrderID,OrderDate
-	  HAVING SUM(Quantity * Price) > 10000;
+      	FROM  orders o          
+      	JOIN orderdetails od ON o.OrderID = od.OrderID
+      	JOIN products p on od.ProductID = p.ProductID
+      	GROUP BY o.OrderID,OrderDate
+     	HAVING SUM(Quantity * Price) > 10000;
 	 
 	 
 	
@@ -107,7 +107,7 @@ ProductID. Эта процедура должна возвращать спис�
 */
 
 CREATE PROCEDURE GetProductSales(_ProductID INT)
-begin
+BEGIN
 	SELECT 
 	o.OrderID,
 	CustomerID,
@@ -115,7 +115,7 @@ begin
 FROM orders o
 	join orderdetails od on o.OrderID = od.OrderID 
 	where ProductID = _ProductID;
-end
+END
 
 /*
 call GetProductSales(1);
